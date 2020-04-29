@@ -11,3 +11,19 @@ I'm the GitHub Learning Lab bot and I'm here to help guide you in your journey t
 I'll meet you over there, can't wait to get started!
 
 This course is using the :sparkles: open source project [reveal.js](https://github.com/hakimel/reveal.js/). In some cases we’ve made changes to the history so it would behave during class, so head to the original project repo to learn more about the cool people behind this project.
+
+```mermaid
+sequenceDiagram
+ServiceFunction ->> connectDocuSign: Invokes with function itself
+connectDocuSign ->> checkToken: Invokes
+checkToken ->> checkToken: Decides the token in global is invalid
+checkToken ->> getToken: Invokes
+getToken ->> DocuSign API: Invokes
+DocuSign API ->> DocuSign API: Generates a token
+DocuSign API ->> getToken: Sends access token token
+getToken ->> checkToken: Passes the token
+checkToken ->> checkToken: Sets the token to global variable with expiration time
+checkToken ->> connectDocuSign: Returns back
+connectDocuSign ->> connectDocuSign: Sets the token to DocuSign client
+connectDocuSign ->> ServiceFunction: Returns the function itself
+```
